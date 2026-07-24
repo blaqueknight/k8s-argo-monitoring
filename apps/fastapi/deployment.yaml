@@ -31,7 +31,7 @@ data:
   OTEL_METRICS_EXPORTER: "none"
   OTEL_LOGS_EXPORTER: "none"
   # Tempo standalone OTLP endpoint (using HTTP protocol on port 4318)
-  OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://tempo.tempo.svc.cluster.local:4318/v1/traces"
+  OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: "http://tempo.monitoring.svc.cluster.local:4318/v1/traces"
   OTEL_EXPORTER_OTLP_PROTOCOL: "http/protobuf"
   OTEL_PYTHON_LOG_CORRELATION: "true"
 ---
@@ -58,7 +58,7 @@ spec:
     spec:
       containers:
         - name: fastapi
-          image: danblanco/fastapi-telemetry:latest  # Replace with your registry image
+          image: ghcr.io/blaqueknight/k8s-argo-monitoring-fastapi:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
