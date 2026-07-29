@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: automation-gateway
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/blaqueknight/bc-platform-engineer-networking.git
+    targetRevision: main
+    path: apps/automation-gateway
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: apps   # or whatever your app namespace is
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: automation-gateway
+  labels:
+    app: automation-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: automation-gateway
+  template:
+    metadata:
+      labels:
+        app: automation-gateway
+    spec:
+      containers:
+        - name: automation-gateway
+          image: blaqueknight/automation-gateway:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: http
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: http

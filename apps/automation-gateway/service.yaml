@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: automation-gateway
+  labels:
+    app: automation-gateway
+spec:
+  type: ClusterIP
+  selector:
+    app: automation-gateway
+  ports:
+    - name: http
+      port: 80
+      targetPort: 8000
